@@ -15,5 +15,39 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     };
 
+    $scope.loadOrder = function (){
+        $http.get(contextPath + '/orders/1')
+            .then(function (response) {
+                $scope.Order = response.data;
+            });
+    }
+
+    $scope.addToOrder = function (productId){
+        $http({
+            url: contextPath + '/orders/add',
+            method: 'PUT',
+            params: {
+                orderId: 1,
+                productId: productId
+            }
+        }).then(function (response) {
+            $scope.loadOrder();
+        });
+    }
+
+    $scope.removeFromOrder = function (productId){
+        $http({
+            url: contextPath + '/orders/delete',
+            method: 'PUT',
+            params: {
+                orderId: 1,
+                productId: productId
+            }
+        }).then(function (response) {
+            $scope.loadOrder();
+        });
+    }
+
     $scope.loadProducts();
+    $scope.loadOrder();
 });
