@@ -34,7 +34,7 @@ public class OrdersController {
     @PutMapping("/add")
     public OrderDto addToOrder(@RequestParam Long orderId, @RequestParam Long productId) {
         Order order = orderService.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order not found, id: " + orderId));
-        Product product =productsService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + productId));
+        Product product = productsService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + productId));
         order.getProducts().add(product);
         return orderConverter.entityToDto(order);
     }
@@ -45,7 +45,7 @@ public class OrdersController {
     @PutMapping("/delete")
     public OrderDto deleteFromOrder(@RequestParam Long orderId, @RequestParam Long productId) {
         Order order = orderService.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order not found, id: " + orderId));
-        Product product =productsService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + productId));
+        Product product = productsService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + productId));
         order.getProducts().remove(product);
         return orderConverter.entityToDto(order);
     }
