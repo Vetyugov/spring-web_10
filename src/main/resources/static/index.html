@@ -79,7 +79,7 @@
             <td>{{p.title}}</td>
             <td>{{p.price}}</td>
             <td>
-                <button class="btn btn-danger" ng-click="addToOrder(p.id)">Добавить в заказ</button>
+                <button class="btn btn-danger" ng-click="addToCart(p.id)">Добавить в корзину</button>
             </td>
         </tr>
         </tbody>
@@ -94,16 +94,29 @@
             <td>Действие</td>
         </tr>
         <tbody>
-        <tr ng-repeat="p in Order.products">
-            <td>{{p.id}}</td>
-            <td>{{p.title}}</td>
-            <td>{{p.price}}</td>
+        <tr ng-repeat="item in Cart.items">
+            <td>{{item.productId}}</td>
+            <td>{{item.productTitle}}</td>
+            <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
             <td>
-                <button class="btn btn-danger" ng-click="removeFromOrder(p.id)">Удалить из заказа</button>
+                <button class="btn btn-danger" ng-click="removeFromCart(p.id)">Удалить из заказа</button>
             </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Итого</td>
+            <td>{{Cart.totalPrice}}</td>
         </tr>
         </tbody>
     </table>
+
+    <p>
+        <button class="btn btn-secondary" ng-click="clearCart()">Очистить корзину</button>
+        <button class="btn btn-primary" ng-click="createOrder()">Оформить заказ</button>
+    </p>
+    <p>
+        <button class="btn btn-danger" ng-click="showCurrentUserInfo()">Обо мне</button>
+    </p>
 </div>
 
 </body>

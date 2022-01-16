@@ -19,27 +19,29 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         });
     };
 
-    $scope.loadOrder = function (){
-        $http.get(contextPath + '/orders/1')
+
+    $scope.addToCart = function (productId) {
+        $http.get('http://localhost:8189/app/api/v1/carts/add/' + productId)
             .then(function (response) {
-                $scope.Order = response.data;
+                $scope.loadCart();
             });
     }
 
-    $scope.addToOrder = function (productId){
-        $http({
-            url: contextPath + '/orders/add',
-            method: 'PUT',
-            params: {
-                orderId: 1,
-                productId: productId
-            }
-        }).then(function (response) {
-            $scope.loadOrder();
-        });
+    $scope.clearCart = function () {
+        $http.get('http://localhost:8189/app/api/v1/carts/clear')
+            .then(function (response) {
+                $scope.loadCart();
+            });
     }
 
-    $scope.removeFromOrder = function (productId){
+    $scope.loadCart = function () {
+        $http.get('http://localhost:8189/app/api/v1/carts')
+            .then(function (response) {
+                $scope.Cart = response.data;
+            });
+    }
+
+    $scope.removeFromCart = function (productId){
         $http({
             url: contextPath + '/orders/delete',
             method: 'PUT',
@@ -99,5 +101,5 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     }
 
     $scope.loadProducts();
-    $scope.loadOrder();
+    $scope.loadCart();
 });
