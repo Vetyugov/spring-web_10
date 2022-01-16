@@ -32,11 +32,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    @CreationTimestamp
+    @CreationTimestamp//при создании сущности
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @UpdateTimestamp //при обновлении сущности
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }

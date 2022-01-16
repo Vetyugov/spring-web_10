@@ -1,11 +1,13 @@
 package com.geekbrains.spring.web.dto;
 
 import com.geekbrains.spring.web.entities.Product;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class OrderItemDto {
     private Long productId;
     private String productTitle;
@@ -26,3 +28,4 @@ public class OrderItemDto {
         this.price = this.quantity * this.pricePerProduct;
     }
 }
+
